@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Practica2" parent="Theme.Material3.DayNight.NoActionBar"/>
+
+    <style name="Theme.Practica2.Splash" parent="Base.Theme.Practica2">
+        <item name="android:windowBackground">@drawable/splashscreen_splatoon</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+</resources>

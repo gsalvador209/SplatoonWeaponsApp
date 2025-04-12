@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Practica2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sub_weapon">Sub:</string>
+    <string name="special_weapon">Special:</string>
+    <string name="range_weapon">Range:</string>
+    <string name="damage_weapon">Damage:</string>
+    <string name="conexion_error">Error en conexion</string>
+    <string name="Clicked">Click en %1$s</string>
+    <string name="id_recived">ID recibido como detalle %1$s</string>
+</resources>
