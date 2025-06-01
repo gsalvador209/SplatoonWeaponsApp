@@ -42,21 +42,25 @@ android {
 
 dependencies {
 //Para retrofit y Gson
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
 //Adicional para el interceptor
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation(libs.logging.interceptor)
 
 //Glide y Picasso
-    implementation("com.github.bumptech.glide:glide:4.13.2")
-    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation(libs.glide)
+    implementation(libs.picasso)
 
 //Para las corrutinas con alcance lifecycle (opcional)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
 //Imágenes con bordes redondeados
-    implementation("com.makeramen:roundedimageview:2.3.0")
+    implementation(libs.roundedimageview)
+
+    //Api de youtube
+    implementation(libs.core)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
