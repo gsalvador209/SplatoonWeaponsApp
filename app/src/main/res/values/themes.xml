@@ -1,11 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Practica2" parent="Theme.Material3.DayNight.NoActionBar"/>
+    <style name="Base.Theme.Splatpoons" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/blitz_main</item>
+        <item name="fontFamily">@font/blitz_main</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextTitleBlitz</item>
+        <item name="textAppearanceTitleMedium">@style/TextSubtitleBlitz</item>
+        <item name="textAppearanceBodyLarge">@style/TextBodyBlitz</item>
+        <item name="textAppearanceBodySmall">@style/TextCaptionBlitz</item>
 
-    <style name="Theme.Practica2.Splash" parent="Base.Theme.Practica2">
+    </style>
+
+    <style name="Theme.Splatpoons.Splash" parent="Base.Theme.Splatpoons">
         <item name="android:windowBackground">@drawable/splashscreen_splatoon</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-
     </style>
 </resources>
