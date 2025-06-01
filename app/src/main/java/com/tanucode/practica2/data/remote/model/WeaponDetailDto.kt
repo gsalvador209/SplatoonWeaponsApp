@@ -17,6 +17,8 @@ data class WeaponDetailDto(
     var damage: Int? = null,
     @SerializedName("image")
     var image: String? = null,
+    @SerializedName("video")
+    var video: String? = null
 )
 /*
 "id": "shooter_quickmiddle_01",
@@ -26,6 +28,6 @@ data class WeaponDetailDto(
 "special": "Super Chump",
 "range": 50,
 "damage": 29,
-"image":/*
-
+"image": ""
+"video" " ""
  */
