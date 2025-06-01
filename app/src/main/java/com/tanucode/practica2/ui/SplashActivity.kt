@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Practica2_Splash) //Debe ir antes del super.onCreate
+        //setTheme(R.style.Theme_Splatpoons_Splash) //Debe ir antes del super.onCreate
         super.onCreate(savedInstanceState)
 
 
