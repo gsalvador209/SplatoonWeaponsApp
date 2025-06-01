@@ -61,6 +61,12 @@ dependencies {
     //Api de youtube
     implementation(libs.core)
 
+    //Exoplayer
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
