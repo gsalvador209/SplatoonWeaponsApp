@@ -1,5 +1,6 @@
 package com.tanucode.practica2.ui.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,8 +27,13 @@ class WeaponListFragment : Fragment() {
 
     private lateinit var repository: WeaponsRepository
 
+    private lateinit var mediaPlayer : MediaPlayer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
     }
 
     override fun onCreateView(
@@ -42,10 +48,12 @@ class WeaponListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         repository = (requireActivity().application as WeaponsRFAPP).repository
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.energy_stand)
 
         lifecycleScope.launch {
             try{
                 val weapons = repository.getWeapons()
+                mediaPlayer.start()
                 binding.rvWeapons.apply{
                     layoutManager = GridLayoutManager(requireContext(),2)
                     adapter = WeaponsAdapter(weapons){ selectedWeapon ->
@@ -84,9 +92,15 @@ class WeaponListFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer.pause()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        mediaPlayer.release()
     }
 
 }
