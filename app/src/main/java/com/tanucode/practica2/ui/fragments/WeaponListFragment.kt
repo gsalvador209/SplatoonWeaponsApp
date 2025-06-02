@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanucode.practica2.R
 import com.tanucode.practica2.application.WeaponsRFAPP
@@ -46,7 +47,7 @@ class WeaponListFragment : Fragment() {
             try{
                 val weapons = repository.getWeapons()
                 binding.rvWeapons.apply{
-                    layoutManager = LinearLayoutManager(requireContext())
+                    layoutManager = GridLayoutManager(requireContext(),2)
                     adapter = WeaponsAdapter(weapons){ selectedWeapon ->
                         Log.d(Constants.LOGTAG,
                             context.getString(R.string.Clicked, selectedWeapon.name))
