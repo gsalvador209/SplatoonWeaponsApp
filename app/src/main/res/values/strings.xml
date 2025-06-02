@@ -12,4 +12,5 @@
     <string name="model">Model</string>
     <string name="weapon">Weapon</string>
     <string name="weapon_class">class</string>
+    <string name="specs">Specs</string>
 </resources>
