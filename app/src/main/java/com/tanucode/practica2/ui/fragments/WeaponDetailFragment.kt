@@ -79,6 +79,7 @@ class WeaponDetailFragment : Fragment() {
                         initializePlayer(videoUrl)
                     } ?: run {
                         exoView.visibility = View.GONE
+                        model.visibility = View.GONE
                         Toast.makeText(requireContext(), "Video no disponible", Toast.LENGTH_SHORT).show()
                     }
 
@@ -111,6 +112,7 @@ class WeaponDetailFragment : Fragment() {
             player.addListener(object : Player.Listener {
                 override fun onPlayerError(error: PlaybackException) {
                     binding.exoView.visibility = View.GONE
+                    binding.model.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         "Error al reproducir el video",
