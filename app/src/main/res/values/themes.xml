@@ -3,10 +3,6 @@
     <style name="Base.Theme.Splatpoons" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/blitz_main</item>
         <item name="fontFamily">@font/blitz_main</item>
-        <item name="textAppearanceHeadlineLarge">@style/TextTitleBlitz</item>
-        <item name="textAppearanceTitleMedium">@style/TextSubtitleBlitz</item>
-        <item name="textAppearanceBodyLarge">@style/TextBodyBlitz</item>
-        <item name="textAppearanceBodySmall">@style/TextCaptionBlitz</item>
 
     </style>
 
