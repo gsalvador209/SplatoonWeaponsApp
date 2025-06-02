@@ -86,7 +86,12 @@ class WeaponDetailFragment : Fragment() {
                 }
 
             }catch (e: Exception){
-                //Error de conexión
+                Toast.makeText(
+                    requireContext(),
+                    "No hay conexión a internet",
+                    Toast.LENGTH_LONG
+                ).show()
+                //Implementar una pantalla de desconexión y retry
             }finally {
                 binding.pbLoading.visibility = View.GONE
             }
