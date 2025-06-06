@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.tanucode.practica2.MainActivity
 import com.tanucode.practica2.R
+import com.tanucode.practica2.auth.LoginActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(1500)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
         }
 
