@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -16,6 +18,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if(localPropertiesFile.exists()){
+            localProperties.load(localPropertiesFile.inputStream())
+        }
+
+        val mapsApiKey = localProperties.getProperty("MAPS_API_KEY")
+
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
@@ -71,6 +83,16 @@ dependencies {
 
     //Para imagenes circulares
     implementation(libs.circleimageview)
+
+
+    //Google Maps (Play services de Google Maps, tanto para vistas XML como para Compose)
+    implementation(libs.play.services.maps)
+
+//API'S opcionales para la ubicación (XML y Compose). Ej. Clase FusedLocationProviderClient
+    implementation(libs.play.services.location)
+
+//Para corrutinas con alcance viewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
