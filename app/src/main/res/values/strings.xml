@@ -49,4 +49,6 @@
     <string name="forgot_password">Forgotten password? Restore password</string>
     <string name="weapon_list">Weapon list</string>
     <string name="logout">Logout</string>
+    <string name="location">Location</string>
+    <string name="connection_lost">Connection lost</string>
 </resources>

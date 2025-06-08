@@ -21,6 +21,7 @@ import java.io.File
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         FirebaseApp.initializeApp(this)
+        com.google.android.gms.maps.MapsInitializer.initialize(this)
         setTheme(R.style.Theme_Splatpoons_Splash) //Debe ir antes del super.onCreate
         super.onCreate(savedInstanceState)
 

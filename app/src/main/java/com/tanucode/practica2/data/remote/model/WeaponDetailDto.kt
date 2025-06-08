@@ -18,7 +18,11 @@ data class WeaponDetailDto(
     @SerializedName("image")
     var image: String? = null,
     @SerializedName("video")
-    var video: String? = null
+    var video: String? = null,
+    @SerializedName("lat")
+    var lat: Double? = null,
+    @SerializedName("lon")
+    var lon: Double? = null
 )
 /*
 "id": "shooter_quickmiddle_01",

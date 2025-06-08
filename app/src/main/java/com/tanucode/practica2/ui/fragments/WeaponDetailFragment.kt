@@ -1,41 +1,59 @@
 package com.tanucode.practica2.ui.fragments
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.tanucode.practica2.R
 import com.tanucode.practica2.application.WeaponsRFAPP
 import com.tanucode.practica2.constants.Constants
 import com.tanucode.practica2.data.WeaponsRepository
+import com.tanucode.practica2.data.remote.model.WeaponDetailDto
 import com.tanucode.practica2.databinding.FragmentWeaponDetailBinding
+import com.tanucode.practica2.ui.BaseFragment
 import kotlinx.coroutines.launch
 
 private const val ARG_WEAPON_ID  = "id"
 
 
-class WeaponDetailFragment : Fragment() {
+class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMapReadyCallback {
 
     private var _binding : FragmentWeaponDetailBinding? = null
     private val binding get() = _binding!! //Su valor solo se asigna cunado _binding se infla
 
-    //Id para identificar cada arma, No es un número
+    private var weaponDetailData: WeaponDetailDto? = null
     private var weaponId : String? = null
-
-    //Repositorio para las funciones del API
     private lateinit var  repository: WeaponsRepository
 
     //Para videos
     private var exoPlayer: ExoPlayer? = null
+
+    //Para maps
+    private lateinit var googleMap: GoogleMap
+    private var isMapReady = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +61,6 @@ class WeaponDetailFragment : Fragment() {
             weaponId = args.getString(ARG_WEAPON_ID) //El parámetro se recibe propiamente
             //Es nullable porque podría levantarse el fragment sin parámetro
         }
-
 
     }
 
@@ -58,11 +75,23 @@ class WeaponDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MapsInitializer.initialize(requireContext())
+
+        val mapFragment = SupportMapFragment.newInstance()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.map,mapFragment)
+            .commitNow()
+        mapFragment.getMapAsync(this)
+
         repository = (requireActivity().application as WeaponsRFAPP).repository
 
         lifecycleScope.launch { //Cuando se crea la vista se llama al API
+            binding.pbLoading.visibility = View.VISIBLE
             try {
                 val weaponDetail = repository.getWeaponDetail(weaponId)
+                weaponDetailData = weaponDetail
+
                 binding.apply {
                     tvName.text = weaponDetail.name
                     tvClass.text = weaponDetail.weaponClass
@@ -82,7 +111,7 @@ class WeaponDetailFragment : Fragment() {
                         model.visibility = View.GONE
                         Toast.makeText(requireContext(), "Video no disponible", Toast.LENGTH_SHORT).show()
                     }
-
+                    tryShowMarker()
                 }
 
             }catch (e: Exception){
@@ -97,6 +126,8 @@ class WeaponDetailFragment : Fragment() {
             }
             Log.d(Constants.LOGTAG, getString(R.string.id_recived, id.toString()))
         }
+
+
     }
 
     override fun onDestroy() {
@@ -129,6 +160,54 @@ class WeaponDetailFragment : Fragment() {
 
             player.playWhenReady = true
         }
+    }
+
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+        isMapReady = true
+        tryShowMarker()
+    }
+
+    private fun tryShowMarker(){
+        val detail = weaponDetailData
+        Log.d(Constants.LOGTAG,"isMapReady: $isMapReady")
+        Log.d(Constants.LOGTAG,"detail: $detail")
+        if (!isMapReady || detail == null) return
+
+        detail.lat?.let { lat ->
+            detail.lon?.let { lon ->
+                val loc = LatLng(lat, lon)
+
+                val original = BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.ic_pin
+                )
+
+                val sizeDp = 64f
+                val sizePx = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    sizeDp,
+                    resources.displayMetrics
+                ).toInt()
+
+
+                val smallMarker: Bitmap = Bitmap.createScaledBitmap(
+                    original,
+                    sizePx,
+                    sizePx,
+                    false
+                )
+
+                googleMap.addMarker(
+                    MarkerOptions()
+                        .position(loc)
+                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                        .title(detail.name)
+                )
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 12f))
+            }
+        }
+
     }
 
     companion object{

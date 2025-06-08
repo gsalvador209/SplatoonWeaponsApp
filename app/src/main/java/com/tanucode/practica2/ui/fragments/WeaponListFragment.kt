@@ -16,11 +16,12 @@ import com.tanucode.practica2.application.WeaponsRFAPP
 import com.tanucode.practica2.constants.Constants
 import com.tanucode.practica2.data.WeaponsRepository
 import com.tanucode.practica2.databinding.FragmentWeaponListBinding
+import com.tanucode.practica2.ui.BaseFragment
 import com.tanucode.practica2.ui.adapters.WeaponsAdapter
 import kotlinx.coroutines.launch
 
 
-class WeaponListFragment : Fragment() {
+class WeaponListFragment : BaseFragment(R.layout.fragment_weapon_list) {
 
     private var _binding : FragmentWeaponListBinding? = null
     private val binding get() = _binding!!
