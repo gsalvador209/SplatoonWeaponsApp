@@ -134,16 +134,61 @@
                     app:layout_constraintTop_toTopOf="@+id/special"
                     app:layout_constraintBottom_toBottomOf="@+id/special" />
 
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressRange"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+
+                    android:layout_marginHorizontal="10dp"
+
+                    app:indicatorSize="14dp"
+                    app:trackThickness="14dp"
+                    app:trackColor="?attr/colorSurfaceVariant"
+                    app:indicatorColor="?attr/colorPrimary"
+                    app:trackCornerRadius="6dp"
+                    app:indicatorTrackGapSize="0dp"
+
+
+                    android:max="100"
+                    app:layout_constraintStart_toEndOf="@+id/range"
+                    app:layout_constraintEnd_toStartOf="@id/tv_range"
+                    app:layout_constraintTop_toTopOf="@id/range"
+                    app:layout_constraintBottom_toBottomOf="@+id/range"
+                    />
+
                 <TextView
                     android:id="@+id/tv_range"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="?attr/colorOnSurface"
+                    android:layout_marginEnd="40dp"
 
-                    app:layout_constraintStart_toEndOf="@+id/range"
-                    app:layout_constraintTop_toTopOf="@id/range"
+                    app:layout_constraintStart_toEndOf="@+id/progressRange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/range"
                     app:layout_constraintBottom_toBottomOf="@+id/range" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressDamage"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+
+                    android:layout_marginHorizontal="10dp"
+
+                    app:indicatorSize="14dp"
+                    app:trackThickness="14dp"
+                    app:trackColor="?attr/colorSurfaceVariant"
+                    app:indicatorColor="?attr/colorPrimary"
+                    app:trackCornerRadius="6dp"
+                    app:indicatorTrackGapSize="0dp"
+
+                    android:max="160"
+                    app:layout_constraintStart_toEndOf="@+id/damage"
+                    app:layout_constraintEnd_toStartOf="@id/tv_damage"
+                    app:layout_constraintTop_toTopOf="@id/damage"
+                    app:layout_constraintBottom_toBottomOf="@+id/damage"
+                    />
 
                 <TextView
                     android:id="@+id/tv_damage"
@@ -152,7 +197,10 @@
                     android:layout_marginStart="10dp"
                     android:textColor="?attr/colorOnSurface"
 
-                    app:layout_constraintStart_toEndOf="@+id/damage"
+                    android:layout_marginEnd="40dp"
+
+                    app:layout_constraintStart_toEndOf="@+id/progressDamage"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/damage"
                     app:layout_constraintBottom_toBottomOf="@+id/damage" />
 
@@ -174,17 +222,16 @@
                     android:id="@+id/exoView"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
-                    app:use_controller="false"
-                    app:resize_mode="fit"
+                    android:layout_marginHorizontal="60dp"
+                    android:layout_marginTop="36dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
 
                     app:layout_constraintTop_toBottomOf="@+id/model"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    android:layout_marginHorizontal="60dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="40dp"
-                    />
+                    app:resize_mode="fit"
+                    app:use_controller="false" />
 
                 <TextView
                     android:id="@+id/location"

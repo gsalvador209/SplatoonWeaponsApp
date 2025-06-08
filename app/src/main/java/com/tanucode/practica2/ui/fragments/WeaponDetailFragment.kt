@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.tanucode.practica2.R
 import com.tanucode.practica2.application.WeaponsRFAPP
 import com.tanucode.practica2.constants.Constants
@@ -34,6 +36,7 @@ import com.tanucode.practica2.data.remote.model.WeaponDetailDto
 import com.tanucode.practica2.databinding.FragmentWeaponDetailBinding
 import com.tanucode.practica2.ui.BaseFragment
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 private const val ARG_WEAPON_ID  = "id"
 
@@ -101,7 +104,19 @@ class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMa
                     tvClass.text = weaponDetail.weaponClass
                     tvSub.text  = weaponDetail.sub
                     tvSpecial.text = weaponDetail.special
-                    tvRange.text = weaponDetail.range.toString()
+
+                    //Barras de progreso
+                    weaponDetail.range?.let { range ->
+                        progressRange.max      = 100
+                        progressRange.progress = range
+                        tvRange.text      = range.toString()
+                    }
+                    weaponDetail.damage?.let { damage ->
+                        progressDamage.max      = 160
+                        progressDamage.progress = damage
+                        tvDamage.text      = damage.toString()
+                    }
+
                     tvDamage.text = weaponDetail.damage.toString()
 
                     Glide.with(requireActivity())
@@ -159,6 +174,8 @@ class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMa
         isMapReady = true
         tryShowMarker()
     }
+
+
 
     private fun tryShowMarker(){
         val detail = weaponDetailData
