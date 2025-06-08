@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
@@ -73,6 +74,14 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        FirebaseAuth.getInstance().currentUser?.let {
+            actionLoginSuccesful()
+        }
+    }
+
+
     private fun actionLoginSuccesful(): Unit {
         startActivity(Intent(this, MainActivity::class.java))
         finish() //Saca el login del backstack
@@ -105,6 +114,7 @@ class LoginActivity : AppCompatActivity() {
     private fun authenticateUser(email : String, password : String) : Unit{
         firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener {authResult ->
             if(authResult.isSuccessful){
+                Log.d("APPLOGS", "⏩ currentUser = ${firebaseAuth.currentUser}")
                 message(getString(R.string.login_succesful))
                 actionLoginSuccesful()
             }else{
