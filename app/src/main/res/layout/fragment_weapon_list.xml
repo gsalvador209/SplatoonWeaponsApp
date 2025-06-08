@@ -14,9 +14,46 @@
         android:indeterminateDuration="1500"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWeapons"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="@string/weapon_list"
+                android:textSize="32sp"
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWeapons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
 
 </FrameLayout>
