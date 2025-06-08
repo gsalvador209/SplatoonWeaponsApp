@@ -23,16 +23,15 @@ import kotlinx.coroutines.launch
 
 class WeaponListFragment : BaseFragment(R.layout.fragment_weapon_list) {
 
-    private var _binding : FragmentWeaponListBinding? = null
+    private var _binding: FragmentWeaponListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var repository: WeaponsRepository
 
-    private lateinit var mediaPlayer : MediaPlayer
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
 
     }
@@ -60,18 +59,21 @@ class WeaponListFragment : BaseFragment(R.layout.fragment_weapon_list) {
                 .addToBackStack(ProfileFragment::class.java.simpleName)
                 .commit()
         }
+        loadWeaponList()
+    }
 
-
+    private fun loadWeaponList(){
         lifecycleScope.launch {
-            try{
+            try {
                 val weapons = repository.getWeapons()
-                mediaPlayer.start()
-                binding.rvWeapons.apply{
-                    layoutManager = GridLayoutManager(requireContext(),2)
-                    adapter = WeaponsAdapter(weapons){ selectedWeapon ->
-                        Log.d(Constants.LOGTAG,
-                            context.getString(R.string.Clicked, selectedWeapon.name))
-                        selectedWeapon.id?.let{ id ->
+                binding.rvWeapons.apply {
+                    layoutManager = GridLayoutManager(requireContext(), 2)
+                    adapter = WeaponsAdapter(weapons) { selectedWeapon ->
+                        Log.d(
+                            Constants.LOGTAG,
+                            context.getString(R.string.Clicked, selectedWeapon.name)
+                        )
+                        selectedWeapon.id?.let { id ->
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .replace(
                                     R.id.fragment_container,
@@ -79,24 +81,13 @@ class WeaponListFragment : BaseFragment(R.layout.fragment_weapon_list) {
                                 )
                                 .addToBackStack(null)
                                 .commit()
-
                         }
-
                     }
-
-
-
                 }
-
-
-            }catch(e : Exception){
+                mediaPlayer.start()
+            } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.conexion_error),
-                    Toast.LENGTH_LONG
-                ).show()
-            }finally {
+            } finally {
                 binding.pbLoading.visibility = View.GONE
             }
 
@@ -112,6 +103,10 @@ class WeaponListFragment : BaseFragment(R.layout.fragment_weapon_list) {
         super.onDestroy()
         _binding = null
         mediaPlayer.release()
+    }
+
+    override fun onNetworkdRestorded() {
+        loadWeaponList()
     }
 
 }

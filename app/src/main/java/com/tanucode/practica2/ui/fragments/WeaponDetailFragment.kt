@@ -86,6 +86,10 @@ class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMa
 
         repository = (requireActivity().application as WeaponsRFAPP).repository
 
+        loadWeaponDetail()
+    }
+
+    private fun loadWeaponDetail(){
         lifecycleScope.launch { //Cuando se crea la vista se llama al API
             binding.pbLoading.visibility = View.VISIBLE
             try {
@@ -109,31 +113,19 @@ class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMa
                     } ?: run {
                         exoView.visibility = View.GONE
                         model.visibility = View.GONE
-                        Toast.makeText(requireContext(), "Video no disponible", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),
+                            getString(R.string.video_unavailable), Toast.LENGTH_SHORT).show()
                     }
                     tryShowMarker()
                 }
 
             }catch (e: Exception){
-                Toast.makeText(
-                    requireContext(),
-                    "No hay conexión a internet",
-                    Toast.LENGTH_LONG
-                ).show()
-                //Implementar una pantalla de desconexión y retry
+                e.printStackTrace()
             }finally {
                 binding.pbLoading.visibility = View.GONE
             }
             Log.d(Constants.LOGTAG, getString(R.string.id_recived, id.toString()))
         }
-
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding =  null //Por el ciclo de vida tricky del fragment
-        //Es necesario liberar el binding al destruirse
     }
 
     private fun initializePlayer(videoUrl: String){
@@ -151,7 +143,7 @@ class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMa
                     binding.model.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
-                        "Error al reproducir el video",
+                        getString(R.string.error_video),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -208,6 +200,16 @@ class WeaponDetailFragment : BaseFragment(R.layout.fragment_weapon_detail), OnMa
             }
         }
 
+    }
+
+    override fun onNetworkdRestorded() {
+        loadWeaponDetail()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding =  null //Por el ciclo de vida tricky del fragment
+        //Es necesario liberar el binding al destruirse
     }
 
     companion object{
