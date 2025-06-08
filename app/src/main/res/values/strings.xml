@@ -47,4 +47,6 @@
     <string name="sign_up">Sign up</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgotten password? Restore password</string>
+    <string name="weapon_list">Weapon list</string>
+    <string name="logout">Logout</string>
 </resources>

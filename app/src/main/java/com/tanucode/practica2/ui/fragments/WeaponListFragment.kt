@@ -50,6 +50,17 @@ class WeaponListFragment : Fragment() {
         repository = (requireActivity().application as WeaponsRFAPP).repository
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.energy_stand)
 
+        binding.civProfile.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.fragment_container,
+                    ProfileFragment()
+                )
+                .addToBackStack(ProfileFragment::class.java.simpleName)
+                .commit()
+        }
+
+
         lifecycleScope.launch {
             try{
                 val weapons = repository.getWeapons()
@@ -59,7 +70,6 @@ class WeaponListFragment : Fragment() {
                     adapter = WeaponsAdapter(weapons){ selectedWeapon ->
                         Log.d(Constants.LOGTAG,
                             context.getString(R.string.Clicked, selectedWeapon.name))
-
                         selectedWeapon.id?.let{ id ->
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .replace(
