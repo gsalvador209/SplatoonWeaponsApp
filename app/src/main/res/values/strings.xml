@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Splatpoons</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sub_weapon">Sub:</string>
     <string name="special_weapon">Special:</string>
@@ -51,4 +50,6 @@
     <string name="logout">Logout</string>
     <string name="location">Location</string>
     <string name="connection_lost">Connection lost</string>
+    <string name="error_video">Error playing the video</string>
+    <string name="video_unavailable">Video unavailable</string>
 </resources>
