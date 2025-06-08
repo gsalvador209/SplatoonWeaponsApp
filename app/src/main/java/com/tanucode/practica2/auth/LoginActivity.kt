@@ -106,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener {authResult ->
             if(authResult.isSuccessful){
                 message(getString(R.string.login_succesful))
+                actionLoginSuccesful()
             }else{
                 binding.progressBar.visibility = View.GONE
                 handleErrors(authResult)
