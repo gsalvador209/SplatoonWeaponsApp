@@ -8,8 +8,10 @@ Showcases: API integration, clean modular structure, custom fonts, Firebase Auth
 ### 🚀 App Showcase
 <div align="center">
   <img src="docs/screenshot_splash.png" alt="Splash Screen" width="200" style="margin: 10px;" />
+ <img src="docs/screenshot_login.png" alt="Login" width="200" style="margin: 10px;" />
   <img src="docs/screenshot_list.png" alt="Weapon List" width="200" style="margin: 10px;" />
-  <img src="docs/screenshot_detail.png" alt="Weapon Detail" width="200" style="margin: 10px;" /> </div>
+  <img src="docs/screenshot_detail.png" alt="Weapon Detail" width="200" style="margin: 10px;" />
+</div>
 
 ### 🎯 Features
 - **REST API Consumer**: Fetches and displays a list of weapons from a hosted Apiary endpoint using Retrofit.
@@ -42,42 +44,25 @@ Showcases: API integration, clean modular structure, custom fonts, Firebase Auth
 📂 Project Structure
 ```bash
 SplatoonWeaponsApp/
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/tanucode/practica2/
-│   │   │   │   ├── application/
-│   │   │   │   │   └── WeaponsRFAPP.kt        # Custom Application class (initializes singletons, fonts)
-│   │   │   │   ├── auth/
-│   │   │   │   │   └── LoginActivity.kt       # Firebase Auth flow
-│   │   │   │   ├── constants/
-│   │   │   │   │   └── Constants.kt           # API base URL, Firebase constants, etc.
-│   │   │   │   ├── data/
-│   │   │   │   │   ├── WeaponsRepository.kt   # Repository pattern (fetches from API/Room in future)
-│   │   │   │   │   └── remote/
-│   │   │   │   │       ├── RetrofitHelper.kt  # Retrofit instance provider
-│   │   │   │   │       ├── WeaponApi.kt        # Retrofit service interface
-│   │   │   │   │       └── model/              # DTOs: WeaponDto, WeaponDetailDto, WeaponsList
-│   │   │   │   ├── ui/
-│   │   │   │   │   ├── SplashActivity.kt      # Launch screen with custom animations
-│   │   │   │   │   ├── adapters/
-│   │   │   │   │   │   ├── WeaponViewHolder.kt # Binds weapon data to item views
-│   │   │   │   │   │   └── WeaponsAdapter.kt    # RecyclerView Adapter
-│   │   │   │   │   └── fragments/
-│   │   │   │   │       ├── WeaponListFragment.kt   # Shows list of weapons
-│   │   │   │   │       └── WeaponDetailFragment.kt # Shows detailed info on selected weapon
-│   │   │   │   └── utils/
-│   │   │   │       └── Extensions.kt          # Extension functions (e.g., View visibility helpers)
-│   │   │   └── res/
-│   │   │       ├── layout/                    # XML layouts (activity_login.xml, fragment_* etc.)
-│   │   │       ├── drawable/                   # Icons, splash screen, placeholder images
-│   │   │       ├── font/                       # Custom font files
-│   │   │       ├── values/                     # colors.xml, strings.xml, dimensions, styles, themes
-│   │   │       └── xml/                        # backup_rules.xml, data_extraction_rules.xml
-│   └── build.gradle.kts                        # Module-level Gradle config
-├── build.gradle.kts                            # Root Gradle config
-├── settings.gradle.kts                         # Includes modules
-└── README.md                                   # ← You are here
+│
+app/
+└── src/
+    └── main/
+        ├── java/com/tanucode/practica2/
+        │   ├── application/          # Clase Application y arranque
+        │   ├── auth/                 # Login, registro, sesión
+        │   ├── constants/            # Constantes globales
+        │   ├── data/                 # Capa de datos
+        │   │   ├── repository/       # Repositorios
+        │   │   └── remote/           # API, DTOs, Retrofit
+        │   ├── ui/                   # UI layer
+        │   │   ├── adapters/         # ViewHolders, Adapters
+        │   │   └── fragments/        # Pantallas / Fragments
+        │   └── utils/                # Extensiones, LiveData de red
+        └── res/
+            ├── layout/               # XML de pantallas y componentes
+            ├── drawable/
+            └── values/               # Colores, strings, estilos
 ```
 
 ### 🌱 Future Improvements
