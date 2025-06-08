@@ -69,6 +69,9 @@ dependencies {
     //Auth con Firebase
     implementation(libs.firebase.auth)
 
+    //Para imagenes circulares
+    implementation(libs.circleimageview)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
